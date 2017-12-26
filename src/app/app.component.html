@@ -1,0 +1,22 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<h2>Here are some links to help you start: </h2>
+<p *ngIf="students.length > 1"> 66666666666 </p>
+<ul>
+  <student-detail
+    *ngFor = "let student of students; let i = index; trackBy: trackByStudentId"
+    [student] = "student"
+    [numberIndex] = "i"
+    (onDelete)="handleDeleteStudent($event)"
+  >
+  </student-detail>
+</ul>
+<div>
+  <input [(ngModel)]="studentName" />
+  <button (click)="handleAddStudent()">添加</button>
+</div>
+

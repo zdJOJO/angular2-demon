@@ -6,11 +6,19 @@
 </div>
 <h2>Here are some links to help you start: </h2>
 <p *ngIf="students.length > 1"> 66666666666 </p>
+<div>
+  请选择一种颜色：  
+  <ng-container *ngFor="let radio of radioes" >  
+    <input type="radio" (click)="handleChooseColor(radio)" [checked]="radio.color===color" /> {{ radio.color }}
+  </ng-container>
+</div>
 <ul>
   <student-detail
     *ngFor = "let student of students; let i = index; trackBy: trackByStudentId"
     [student] = "student"
     [numberIndex] = "i"
+    [helloColor] = "color"
+    [helloFontSize] = "fontSize"
     (onDelete)="handleDeleteStudent($event)"
   >
   </student-detail>

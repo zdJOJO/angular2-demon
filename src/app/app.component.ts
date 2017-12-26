@@ -25,6 +25,14 @@ export class AppComponent {
     ];
   }
 
+  color: string
+  fontSize: number
+  radioes = [
+    {color: "#4cae4c", fontSize: 12 },
+    {color: "#eea236", fontSize: 17 },
+    {color: "#d43f3a", fontSize: 22 }
+  ]
+
   handleAddStudent(){
     let names = this.students.map(student => student.name);
     if(names.indexOf(this.studentName) < 0){
@@ -43,4 +51,10 @@ export class AppComponent {
   }
 
   trackByStudentId =(index: number, student: Student)=> student.id
+
+  handleChooseColor(radio){
+    this.color = radio.color;
+    this.fontSize = radio.fontSize;
+  }
+
 }

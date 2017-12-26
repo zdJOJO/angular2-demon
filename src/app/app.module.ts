@@ -5,12 +5,14 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { StudentDetail } from './student//studentDetail.component';
+import { HighlightDirective } from '../attribute-directives/highlight.directive';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentDetail
+    StudentDetail,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,

@@ -52,8 +52,8 @@ export class StudentDetail {
   @Input("numberIndex") number: string;
   @Output() onDelete = new EventEmitter();
 
-  @Input("helloColor") color: string; // "#4cae4c";
-  @Input("helloFontSize") fontSize: number; //  20;
+  @Input() color: string; // "#4cae4c";
+  @Input() fontSize: number; //  20;
 
   handleDelete(student: Student){
     this.onDelete.emit(student);

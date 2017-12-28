@@ -1,3 +1,7 @@
+/**
+ * @class
+ * @define Student
+*/
 export class Student {
   constructor(
     public age: number,

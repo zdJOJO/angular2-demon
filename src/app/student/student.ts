@@ -5,7 +5,5 @@ export class Student {
     public id: string = ""
   ){ 
     this.id = String(new Date().getTime() + age);
-    this.age = age;
-    this.name = name;
   }
 }

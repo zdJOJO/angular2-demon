@@ -24,7 +24,7 @@
   </student-detail>
 </ul>
 <div>
-  <input [(ngModel)]="studentName" />
+  <input name="studentName" [(ngModel)]="studentName" />
   <button (click)="handleAddStudent()">添加</button>
 </div>
-
+<div><button (click)="handleRemoveLast()">删除</button></div>

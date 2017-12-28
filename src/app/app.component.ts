@@ -1,28 +1,24 @@
 import { Component } from '@angular/core';
 import { Student } from './student/student';
+import { StudentServer } from './student/student.server';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [StudentServer]
 })
 
 
 export class AppComponent {
 
-  title: string
-  studentName: string
+  title: string = "app";
+  studentName: string = "";
   students: Array<Student>
 
-  constructor(){
-    this.title = "app app app";
-    this.studentName = "";
-    this.students = [
-      new Student(12, '建国'),
-      new Student(5, '建华'),
-      new Student(10, '小刚'),
-      new Student(20, '大明')
-    ];
+  constructor(studentServer: StudentServer){
+    this.students = studentServer.getStudent();
   }
 
   color: string
@@ -35,7 +31,7 @@ export class AppComponent {
 
   handleAddStudent(){
     let names = this.students.map(student => student.name);
-    if(names.indexOf(this.studentName) < 0){
+    if(this.studentName && names.indexOf(this.studentName) < 0){
       this.students.push({
         name: this.studentName,
         age: Math.ceil(Math.random()*25),
@@ -55,6 +51,11 @@ export class AppComponent {
   handleChooseColor(radio){
     this.color = radio.color;
     this.fontSize = radio.fontSize;
+  }
+
+  handleRemoveLast(){
+    if(this.students.length > 0)
+      this.students.length -= 1;
   }
 
 }

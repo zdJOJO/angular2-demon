@@ -3,11 +3,13 @@
  * @define Student
 */
 export class Student {
+
+  public id: number
+
   constructor(
     public age: number,
     public name: string,
-    public id: string = ""
   ){ 
-    this.id = String(new Date().getTime() + age);
+    this.id = new Date().getTime() + age
   }
 }

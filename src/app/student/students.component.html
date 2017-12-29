@@ -7,15 +7,16 @@
   </ng-container>
 </div>
 <ul>
-  <student-detail
-    *ngFor = "let student of students; let i = index; trackBy: trackByStudentId"
+  <student-item
+    *ngFor = "let student of students$ | async; let i = index; trackBy: trackByStudentId"
     [student] = "student"
     [numberIndex] = "i"
+    [selectedId] = "selectedId"
     [color] = "color"
     [fontSize] = "fontSize"
-    (onDelete)="handleDeleteStudent($event)"
+    (onDelete)="handleDeleteStudent($event, i)"
   >
-  </student-detail>
+  </student-item>
 </ul>  
 <div>
   <input name="studentName" [(ngModel)]="studentName" />

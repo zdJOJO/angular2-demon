@@ -1,9 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
+import 'rxjs/add/operator/switchMap';
+import { Observable } from 'rxjs/Observable';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+
 import { Student } from './student';
 import { StudentServer } from './student.server';
 
+import { jojoComponentAnimation } from '../animations';
+
 @Component({
   selector: "student-list",
+  animations: [ jojoComponentAnimation ],
   styleUrls: ["./student.less"],
   templateUrl: "./students.component.html",
   providers: [ StudentServer ]
@@ -11,7 +18,13 @@ import { StudentServer } from './student.server';
 
 export class StudentList{
 
-  students: Student[] = [];
+  @HostBinding('@routeAnimation') routeAnimation = true;
+  @HostBinding('style.display')   display = 'block';
+  @HostBinding('style.position')  position = 'absolute';
+
+  students$: Observable<Student[]>;
+  private selectedId: number;
+
   studentName: string = "";
 
   color: string
@@ -22,33 +35,42 @@ export class StudentList{
     {color: "#d43f3a", fontSize: 22 }
   ]
 
-  constructor(studentServer: StudentServer){
-    this.students = studentServer.getStudent();
+  constructor(
+    private service: StudentServer,
+    private route: ActivatedRoute
+  ){ }
+
+  ngOnInit() {
+    this.students$ = this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        // (+) before `params.get()` turns the string into a number
+        this.selectedId = +params.get('id');
+        return this.service.getStudents();
+      });
   }
 
   handleAddStudent(){
-    let names = this.students.map(student => student.name);
-    if(this.studentName && names.indexOf(this.studentName) < 0){
-      this.students.push({
-        name: this.studentName,
-        age: Math.ceil(Math.random()*25),
-        id: ""
-      });
+    let student: Student
+    let student_observable = this.service.getStudents().map( students => 
+      students.find( student => student.name === this.studentName))
+    
+    student_observable.subscribe( x => student=x )
+
+    if(this.studentName && !student){
+      this.service.addStudent( new Student( Math.ceil(Math.random()*25), this.studentName ) );
       this.studentName = ""
     }
   }
 
-  handleDeleteStudent(student: Student){
-    let index = this.students.map(ele=>ele.name).indexOf(student.name);
-    this.students.splice(index, 1);
+  handleDeleteStudent(student: Student, index:number){
+    this.service.removeStudent(index)
+  }
+
+  handleRemoveLast(){
+    this.service.removeStudent(-1)
   }
 
   trackByStudentId =(index: number, student: Student)=> student.id
-
-  handleRemoveLast(){
-    if(this.students.length > 0)
-      this.students.length -= 1;
-  }
 
   handleChooseColor(radio){
     this.color = radio.color;

@@ -45,7 +45,6 @@ export class StudentDetail implements OnInit{
         return this.service.getStudent(params.get("id"))
       }
       );
-    
   }
 
   gotoStudents(student: Student){

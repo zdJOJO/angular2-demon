@@ -1,7 +1,7 @@
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import { Injectable } from '@angular/core';
-import { STUDENTS } from './mock-students';
+import { STUDENTS } from '../../fake-data/data';
 import { Observable } from 'rxjs/Observable';
 
 import { Student } from './student';

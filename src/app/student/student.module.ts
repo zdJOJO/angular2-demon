@@ -14,12 +14,14 @@ import { HighlightDirective } from '../../attribute-directives/highlight.directi
 import { UnlessDirective } from '../../structural-directives/unless.directive';
 
 @NgModule({
+  
   imports: [
     CommonModule,
     FormsModule,
 
     StudentRoutingModule // 学生 路由模块 
   ],
+
   declarations: [
     StudentList,
     StudentItem,
@@ -28,7 +30,10 @@ import { UnlessDirective } from '../../structural-directives/unless.directive';
     HighlightDirective,
     UnlessDirective
   ],
-  providers: [ StudentServer ]
+
+  providers: [ 
+    StudentServer
+  ]
 })
 
 export class StudentModule { }

@@ -1,0 +1,16 @@
+<div class="alert">
+  <h3>Alert</h3>
+  <div>
+    <div>
+      <label>Message: </label>
+    </div>
+    <div>
+      <textarea [(ngModel)]="message" rows="10" cols="35" [disabled]="sending"></textarea>
+    </div>
+  </div>
+  <p *ngIf="sending">sending... ...</p>
+  <p>
+    <button [disabled]="sending" (click)="send()">Send</button>
+    <button [disabled]="sending" (click)="cancel()">Cancel</button>
+  </p>
+</div>

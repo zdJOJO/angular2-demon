@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './404/404.component';
+import { Alert } from './alert/alert.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { StudentModule } from './student/student.module';
@@ -26,7 +27,8 @@ import { CommentModule } from './comment/comment.module';
   ],
   declarations: [
     AppComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    Alert
   ],
   bootstrap: [ AppComponent ]
 })

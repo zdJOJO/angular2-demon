@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 
 
-// import { Student } from './student/student';
-// import { StudentServer } from './student/student.server';
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
